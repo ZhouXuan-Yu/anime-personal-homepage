@@ -1,0 +1,310 @@
+/* 主样式文件 */
+
+/* 变量定义 */
+:root {
+  --primary-color: #63c3a0;
+  --secondary-color: #5a81be;
+  --accent-color: #e86a92;
+  --text-color: #ffffff;
+  --bg-color: #0e0c09;
+  --card-bg: rgba(42, 54, 80, 0.7);
+  --section-bg: rgba(30, 40, 60, 0.5);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --gradient-primary: linear-gradient(120deg, #63c3a0, #5a81be);
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  --border-radius: 12px;
+  --transition: all 0.3s ease;
+  --sidebar-width: 280px;
+}
+
+/* 粒子背景样式 */
+.particles-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(to bottom right, #1a1a2e, #16213e, #0f3460);
+}
+
+/* 加载动画 */
+.loading {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--bg-color);
+  z-index: 1000;
+  transition: opacity 0.5s ease;
+}
+
+.loading.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading.hidden {
+  display: none;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 主布局样式 */
+.layout-with-sidebar {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* 侧边栏样式 */
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: rgba(26, 26, 46, 0.8);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid var(--border-color);
+  position: fixed;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-profile {
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar .profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  overflow: hidden;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar .profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-name h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.profile-subtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 1.5rem 0;
+  overflow-y: auto;
+}
+
+.sidebar-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nav-item {
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 500;
+  border-left: 3px solid transparent;
+}
+
+.nav-item i {
+  width: 20px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--primary-color);
+}
+
+.nav-item.active {
+  background-color: rgba(99, 195, 160, 0.1);
+  color: var(--primary-color);
+  border-left: 3px solid var(--primary-color);
+}
+
+.sidebar-footer {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.sidebar-footer .social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar-footer .social-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.sidebar-footer .social-icon:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-3px);
+}
+
+.copyright {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* 主内容区域 */
+.main-content {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  padding: 2rem;
+}
+
+/* 内容区域 */
+.content-section {
+  display: none;
+  opacity: 0;
+  background-color: var(--section-bg);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.content-section.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+  color: var(--primary-color);
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--gradient-primary);
+  border-radius: 10px;
+}
+
+/* 页脚样式 */
+.site-footer {
+  background-color: rgba(26, 26, 46, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  margin-left: var(--sidebar-width);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-logo img {
+  width: 40px;
+  height: auto;
+}
+
+.footer-slogan {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-links a {
+  position: relative;
+  color: rgba(255, 255, 255, 0.7);
+  transition: var(--transition);
+}
+
+.footer-links a:hover {
+  color: var(--primary-color);
+}
+
+.footer-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  transition: var(--transition);
+}
+
+.footer-links a:hover::after {
+  width: 100%;
+}
